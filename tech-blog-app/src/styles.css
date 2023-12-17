@@ -45,3 +45,15 @@ body {
     font-size: 13px;
     background-color: var(--primary-color);
 }
+
+.bg-theme-secondary{
+    background-color: var(--secondary-color);
+}
+.text-theme-primary{
+    color:var(--primary-color);
+}
+
+/* .btn-theme{
+    height: 58px;
+    border: none;
+} */
