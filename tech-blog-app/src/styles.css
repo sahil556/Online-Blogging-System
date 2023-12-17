@@ -36,3 +36,12 @@ body {
 .bg-theme{
     background-color: var(--primary-color);
 }
+
+
+
+.btn-sub{
+    height: 58px;
+    border: none;
+    font-size: 13px;
+    background-color: var(--primary-color);
+}
