@@ -8,8 +8,8 @@ import { PostService } from 'src/app/services/post.service';
 })
 export class HomeComponent {
   constructor(private postservice: PostService){}
-  featuredPostArray: Array<{data:any}> = [];
-  latestPostArray:Array<{data:any}> = [];
+  featuredPostArray: Array<{id:string, data:any}> = [];
+  latestPostArray:Array<{id:string, data:any}> = [];
   ngOnInit()
   {
     this.postservice.loadFeaturedData().subscribe(val =>{

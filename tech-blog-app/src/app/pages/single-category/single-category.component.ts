@@ -9,7 +9,7 @@ import { PostService } from 'src/app/services/post.service';
 })
 export class SingleCategoryComponent {
   constructor(private route: ActivatedRoute, private postService: PostService){}
-  categoryPostArray: Array<{data:any}> = [];
+  categoryPostArray: Array<{id:string, data:any}> = [];
   category: string = '';
   ngOnInit()
   {
@@ -21,4 +21,5 @@ export class SingleCategoryComponent {
       })
     })
   }
+ 
 }

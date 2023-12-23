@@ -7,9 +7,8 @@ import { Component, Input } from '@angular/core';
 })
 export class PostCardComponent {
 
-  @Input() postData : {data: any} | undefined;
+  @Input() postData : {id:string, data: any} | undefined;
   ngOnInit()
   {
-    console.log(this.postData)
   }
 }

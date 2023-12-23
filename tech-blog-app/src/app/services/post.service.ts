@@ -48,4 +48,21 @@ export class PostService {
     )
   }
 
+  loadOnePost(id: string)
+  {
+    return this.angularfirestore.collection('posts').doc(id).valueChanges();
+  }
+
+  loadSimilar(categoryId: string)
+  {
+    return this.angularfirestore.collection('posts', ref =>ref.where('category.categoryId','==', categoryId )).snapshotChanges().pipe(
+      map(actions=>{
+        return actions.map(a=>{
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return {id, data};
+        })
+      })
+    )
+  }
 }

@@ -1,24 +1,24 @@
-<div class="container">
+<div class="container" *ngIf="singlePost">
     <div class="row">
         <div class="col-md-9">
             <div class="card shadow-effect">
-                <img class="card-img-top img-fluid" src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+                <img class="card-img-top img-fluid" src="{{singlePost.postImgPath}}" alt="">
                 <div class="card-body">
-                    <small class="bg-light text-danger text-center p-2">Design</small>
-                    <small class="bg-light text-success text-center p-2">Featured</small>
-                    <small class="bg-light text-info text-center p-2">Views - 100,255</small>
-                    <small class="bg-light text-warning text-center p-2">LAST UPDATED 2 DAYS</small>
-                    <h1 class="mt-3 mb-3">HOW TO START BLOG</h1>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores porro sint fugit, modi quas, dicta aliquam nobis aspernatur distinctio, cupiditate voluptates nam? Maiores sunt velit earum in, consequuntur, tempore id voluptatibus ea cum ut accusamus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse alias vitae accusantium obcaecati illum rerum soluta quaerat doloremque quidem maxime placeat debitis, cum voluptatem. Possimus libero quidem soluta? Voluptates facilis quidem earum optio? Laborum non animi itaque est similique veniam eveniet porro iure nam, eius ipsa in aut consequatur quae. Hic necessitatibus dicta minima tempore, placeat iste aliquam ut saepe.</p>
+                    <small class="bg-light text-danger text-center p-2">{{singlePost.category.category}}</small>
+                    <small class="bg-light text-success text-center p-2" *ngIf="singlePost.isFeatured">Featured</small>
+                    <small class="bg-light text-info text-center p-2">Views - {{singlePost.views}}</small>
+                    <small class="bg-light text-warning text-center p-2">LAST UPDATED - {{singlePost.createdAt.toMillis() | date}}</small>
+                    <h1 class="mt-3 mb-3">{{singlePost.title}}</h1>
+                    <p [innerHTML]="singlePost.content"></p>
                 </div>
             </div>
             <app-comment-form></app-comment-form>
             <app-comment-list></app-comment-list>
         </div>
         <div class="col-md-3">
-            <app-post-card ></app-post-card>
-            <app-post-card ></app-post-card>
-            <app-post-card ></app-post-card>
+            <div *ngFor="let post of similarPostArray">
+            <app-post-card [postData]="post"></app-post-card>
+            </div>
         </div>
     </div>
 </div>
