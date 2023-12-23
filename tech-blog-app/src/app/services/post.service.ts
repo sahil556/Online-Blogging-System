@@ -35,4 +35,17 @@ export class PostService {
     )
   }
 
+  loadCategoryPost(caetgoryId : string)
+  {
+    return this.angularfirestore.collection('posts', ref =>ref.where('category.categoryId','==', caetgoryId )).snapshotChanges().pipe(
+      map(actions=>{
+        return actions.map(a=>{
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return {id, data};
+        })
+      })
+    )
+  }
+
 }
