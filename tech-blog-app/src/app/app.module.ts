@@ -16,6 +16,9 @@ import { CommentFormComponent } from './comments/comment-form/comment-form.compo
 import { CommentListComponent } from './comments/comment-list/comment-list.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { PostCardComponent } from './layouts/post-card/post-card.component';
+import { AngularFireModule} from '@angular/fire/compat';
+
+import { environment } from 'src/environments/environment.prod';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,8 @@ import { PostCardComponent } from './layouts/post-card/post-card.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]
