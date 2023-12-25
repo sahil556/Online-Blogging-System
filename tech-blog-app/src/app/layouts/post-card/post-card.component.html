@@ -2,7 +2,7 @@
   <img class="card img-top" src="{{postData.data.postImgPath}}" alt="post">
   <div class="card-body">
     <small class="bg-light text-danger text-center">{{postData.data.category.category}}</small>
-    <small class="bg-light text-success text-center p-2">Featured</small>
+    <small class="bg-light text-success text-center p-2" *ngIf="postData.data.isFeatured">Featured</small>
     <small class="bg-light text-info text-center p-2">Views - {{postData.data.views}}</small>
 
 

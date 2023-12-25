@@ -15,10 +15,12 @@ export class SinglePostComponent {
     ngOnInit()
     {
       this.route.params.subscribe(val =>{
+
+        this.postservice.countViews(val['id'])
+        
         this.postservice.loadOnePost(val['id']).subscribe(post =>{
           this.singlePost = post;
           this.loadSimilarPost(this.singlePost.category.categoryId)
-
         })
       })
     }
