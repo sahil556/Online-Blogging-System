@@ -12,8 +12,8 @@
                     <p [innerHTML]="singlePost.content"></p>
                 </div>
             </div>
-            <app-comment-form></app-comment-form>
-            <app-comment-list></app-comment-list>
+            <app-comment-form [postId]="postId"></app-comment-form>
+            <app-comment-list [commentData]="commentArray"></app-comment-list>
         </div>
         <div class="col-md-3">
             <div *ngFor="let post of similarPostArray">

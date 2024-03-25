@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { LoaderService } from 'src/app/services/loader.service';
 import { PostService } from 'src/app/services/post.service';
 
 @Component({
@@ -9,26 +10,39 @@ import { PostService } from 'src/app/services/post.service';
 })
 export class SinglePostComponent {
 
-    constructor(private route: ActivatedRoute, private postservice: PostService){}
+    constructor(private route: ActivatedRoute, private postservice: PostService, private loader: LoaderService){}
     singlePost : any;
+    postId : string = "";
     similarPostArray: Array<{id:string, data:any}>=[];
+    commentArray: Array<{id:string, data:any}>=[];
     ngOnInit()
     {
+      this.loader.showLoader();
       this.route.params.subscribe(val =>{
 
         this.postservice.countViews(val['id'])
         
         this.postservice.loadOnePost(val['id']).subscribe(post =>{
           this.singlePost = post;
-          this.loadSimilarPost(this.singlePost.category.categoryId)
+          this.postId = val['id'];
+          this.loadSimilarPost(this.singlePost.category.categoryId);
+          this.loadComments(this.postId);
+          this.loader.hideLoader();
         })
       })
-    }
+    } 
 
     async loadSimilarPost(catId: string)
     {
       this.postservice.loadSimilar(catId).subscribe(val =>{
         this.similarPostArray = val;
+      })
+    }
+
+    async loadComments(postId: string)
+    {
+      this.postservice.loadComments(postId).subscribe(val =>{
+        this.commentArray = val;
       })
     }
 

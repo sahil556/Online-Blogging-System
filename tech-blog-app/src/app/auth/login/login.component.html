@@ -1,0 +1,37 @@
+<div class="container mb-5">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="card p-5 shadow-effect bg-theme-secondary">
+                <div class="card-body">
+                    <div class="text-center">
+                        <h1 class="text-theme-primary">
+                            <b>Login</b>
+                        </h1>
+                        <p>Please login to access your account.</p>
+                    </div>
+
+                    <form #loginForm = ngForm >
+
+                        <div class="form-group shadow-effect">
+                            <input type="email" name="email" class="form-control" id="" placeholder="Email" ngModel required #Email="ngModel"
+                            email [ngClass]="{'is-invalid':Email.touched && Email.invalid}" />
+                            <div class="alert alert-danger" *ngIf="Email.touched &&  loginForm.controls['email'].hasError('required')">Email Cannot be Empty</div>
+                            <div class="alert alert-danger" *ngIf="loginForm.controls['email'].hasError('email')">Please Enter a Valid Email</div>
+                        </div>
+                        <div class="form-group mt-3 shadow-effect">
+                            <input type="password" name="password" class="form-control" id="" placeholder="Password" ngModel required #Password="ngModel"
+                            [ngClass]="{'is-invalid':Password.touched && Password.invalid}" />
+
+                            <div class="alert alert-danger" *ngIf="Password.touched && Password.invalid">Password Cannot be Empty</div>
+                        </div>
+                        <button class="btn btn-block btn-info btn-theme mt-3" (click)="onSubmit(loginForm.value)" [disabled]="loginForm.invalid">Login</button> &nbsp;
+                        <button class="btn btn-block btn-success btn-theme mt-3" routerLink="/signup" >Sign Up Here</button>
+                        
+                    </form>
+                </div>
+                <p><a routerLink="/reset-password" class="p-3">Forgot Password ?</a></p>
+            </div>
+        </div>
+    </div>
+</div>

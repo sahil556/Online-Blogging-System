@@ -1,6 +1,7 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layouts/header/header.component';
@@ -17,8 +18,22 @@ import { CommentListComponent } from './comments/comment-list/comment-list.compo
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { PostCardComponent } from './layouts/post-card/post-card.component';
 import { AngularFireModule} from '@angular/fire/compat';
-
+import { ToastrModule} from 'ngx-toastr';
 import { environment } from 'src/environments/environment.prod';
+import { SingleCodeComponent } from './pages/single-code/single-code.component';
+import { SpinnerComponent } from './layouts/spinner/spinner.component';
+import { LoaderInterceptor } from './interceptors/loader.interceptor';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MainComponentComponent } from './main-component/main-component.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { LoginComponent } from './auth/login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AllPostComponent } from './posts/all-post/all-post.component';
+import { NewPostComponent } from './posts/new-post/new-post.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { CommentModule } from './post-comments/comment/comment.module';
 
 @NgModule({
   declarations: [
@@ -35,15 +50,37 @@ import { environment } from 'src/environments/environment.prod';
     CommentFormComponent,
     CommentListComponent,
     AboutUsComponent,
-    PostCardComponent
+    PostCardComponent,
+    SingleCodeComponent,
+    SpinnerComponent,
+    MainComponentComponent,
+    SignupComponent,
+    LoginComponent,
+    DashboardComponent,
+    AllPostComponent,
+    NewPostComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    FormsModule
+    FormsModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MatProgressSpinnerModule,
+    ReactiveFormsModule,
+    AngularEditorModule,
+    CommentModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
+      multi: true
+    }
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
