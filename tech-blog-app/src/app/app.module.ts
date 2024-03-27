@@ -24,7 +24,6 @@ import { SingleCodeComponent } from './pages/single-code/single-code.component';
 import { SpinnerComponent } from './layouts/spinner/spinner.component';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MainComponentComponent } from './main-component/main-component.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -65,10 +64,14 @@ import { CommentModule } from './post-comments/comment/comment.module';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     FormsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right', // Adjust positioning
+      preventDuplicates: true, // Prevent duplicate toasts
+      progressBar: true, // Show progress bar
+      // Other configuration options...
+    }),
     BrowserAnimationsModule,
     HttpClientModule,
-    MatProgressSpinnerModule,
     ReactiveFormsModule,
     AngularEditorModule,
     CommentModule

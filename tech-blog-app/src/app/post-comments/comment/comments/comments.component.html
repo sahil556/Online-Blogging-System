@@ -1,1 +1,14 @@
-<p>comments works!</p>
+<div class="comments">
+    <h3 class="commetns-title">comments</h3>
+    <div class="comment-form-tile">Write comment</div>
+    <app-comment-form submitLabel="Write" (handleSubmit)="addComment({text: $event, parentId:null})" ></app-comment-form>
+    <div class="comments-container">
+        <div *ngFor="let comment of getRootComments()">
+            {{comment.data.comment}}
+        <app-single-comment  [commentData]="comment" [currentUserId]="currentUserId" 
+         (setActiveComment)="setActiveComment($event)"
+        [activeComment]="activeComment" (addComment)="addComment($event)"
+        (updateComment)="updateComment($event)" (deleteComment)="deleteComment($event)"></app-single-comment>
+        </div>
+    </div>
+</div>

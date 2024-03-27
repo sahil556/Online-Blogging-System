@@ -192,6 +192,20 @@ export class PostService {
     )
   }
 
+  loadCommentsOfUser(userEmail: string)
+  {
+    console.log("email", userEmail);
+    return this.angularfirestore.collection('comments', ref =>ref.where('userEmail','==', userEmail)).snapshotChanges().pipe(
+      map(actions=>{
+        return actions.map(a=>{
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return {id, data};
+        })
+      })
+    )
+  }
+
   countViews(postId: string){
 
     const viewsCount = {
@@ -202,7 +216,7 @@ export class PostService {
     })
   }
 
-    addComment(commentForm: any, Id : string){
+  addComment(commentForm: any, Id : string){
     const comment = {
         postId: Id,
         name : commentForm.name,
@@ -219,5 +233,52 @@ export class PostService {
       this.toast.warning('Something Went Wrong !', "please try after some time");
     })
     return true;
+  }
+
+  createComment(text: string, parentId:null|string, Id: string, email: string){
+    console.log(text, parentId, email)
+    const comment = {
+      postId : Id,
+      userEmail: email,
+      comment: text,
+      status: 'Approved',
+      createdAt: new Date().toISOString(),
+      parentId: parentId
+    }
+    this.angularfirestore.collection('comments').add(comment).then(docRef=>{
+      this.toast.success('Commnets Added & will be Visible After Verification');
+    })
+    .catch(err =>{
+      this.toast.warning('Something Went Wrong !', "please try after some time");
+    })
+    return true;
+  }
+
+  getRepliesOfComment(parentId: string){
+    return this.angularfirestore.collection('comments', ref =>ref.where('parentId','==', parentId)).snapshotChanges().pipe(
+      map(actions=>{
+        return actions.map(a=>{
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return {id, data};
+        })
+      })
+    )
+  }
+
+  updateComment(comment: string, commentId: string){
+    this.angularfirestore.doc(`comments/${commentId}`).update({comment: comment}).then(docRef =>{
+      this.toast.success("Comment Updated Successfully !");
+    })
+    .catch(err =>{
+      this.toast.success("Something Went Wrong !")
+    })
+  }
+
+  deleteComment(id: string)
+  {
+    this.angularfirestore.doc(`comments/${id}`).delete().then(docRef =>{
+      this.toast.warning("Comment Deleted Successfully !");
+    })
   }
 }
