@@ -4,9 +4,9 @@
     <app-comment-form submitLabel="Write" (handleSubmit)="addComment({text: $event, parentId:null})" ></app-comment-form>
     <div class="comments-container">
         <div *ngFor="let comment of getRootComments()">
-            {{comment.data.comment}}
         <app-single-comment  [commentData]="comment" [currentUserId]="currentUserId" 
          (setActiveComment)="setActiveComment($event)"
+         [replies]="getReplies(comment.id)"
         [activeComment]="activeComment" (addComment)="addComment($event)"
         (updateComment)="updateComment($event)" (deleteComment)="deleteComment($event)"></app-single-comment>
         </div>

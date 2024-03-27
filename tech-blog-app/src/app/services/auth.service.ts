@@ -75,6 +75,9 @@ export class AuthService {
 
   isLoggedin()
   {
+    console.log(JSON.parse(localStorage.getItem('user') || '{}').email)
+    if(JSON.parse(localStorage.getItem('user') || '{}').email != undefined)
+      this.loggedIn.next(true);
     return this.loggedIn.asObservable();
   }
 

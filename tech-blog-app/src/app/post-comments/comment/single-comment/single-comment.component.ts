@@ -23,24 +23,14 @@ export class SingleCommentComponent {
 
   @Input() currentUserId! : string;
   @Input() commentData! : {id:string, data: any};
-  replies! : Array<{id:string, data:any}> ;
+  @Input() replies! : Array<{id:string, data:any}> ;
   @Input() activeComment!: ActiveCommnetInterface | null;
   @Input() parentId! : string | null;
 
-  constructor(private postservice: PostService){
-    if(this.parentId != null)
-      this.getReplies(this.parentId);
-    else
-      this.replies = [];
-  }
- 
-
   ngOnInit():void{
-    console.log("rendering single comment comp")
     this.canReply = Boolean(this.currentUserId);
-    const fiveMinutes = 100000;
-    const timePassed = false;
-    // new Date().getMilliseconds() - new Date(this.commentData.data.createdAt).getMilliseconds() > fiveMinutes;
+    const fiveMinutes = 30000;
+    const timePassed = new Date().getMilliseconds() - new Date(this.commentData.data.createdAt).getMilliseconds() > fiveMinutes;
     this.canEdit = this.currentUserId === this.commentData.data.userEmail && !timePassed;
     this.canDelete = this.currentUserId === this.commentData.data.userEmail && !timePassed && this.replies.length === 0;
     this.replyId = this.parentId ? this.parentId : this.commentData.id;
@@ -53,18 +43,8 @@ export class SingleCommentComponent {
 
   isEditing()
   {
-    console.log("is editing called")
     if(!this.activeComment) return false;
     return this.activeComment.id === this.commentData.id && 
     this.activeComment.type === this.activeCommentType.editing;
   }
-
-  getReplies(commentId: string){
-    console.log("calling get Replies")
-    this.postservice.getRepliesOfComment(commentId).subscribe(val => {
-        this.replies = val;
-    })
-    return this.replies;
-}
-
 }

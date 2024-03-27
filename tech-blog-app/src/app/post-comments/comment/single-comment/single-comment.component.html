@@ -25,6 +25,7 @@
             <app-single-comment *ngFor="let reply of replies" [commentData]="reply" (setActiveComment)="setActiveComment.emit($event)"
             [activeComment]="activeComment" (addComment)="addComment.emit($event)"
             [parentId]="commentData.id"
+            [replies]="[]"
             [currentUserId]="currentUserId"
             (updateComment)="updateComment.emit($event)"
             (deleteComment)="deleteComment.emit($event)"></app-single-comment>

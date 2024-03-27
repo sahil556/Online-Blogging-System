@@ -65,7 +65,7 @@ import { CommentModule } from './post-comments/comment/comment.module';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     FormsModule,
     ToastrModule.forRoot({
-      positionClass: 'toast-top-right', // Adjust positioning
+      positionClass: 'toast-bottom-right', // Adjust positioning
       preventDuplicates: true, // Prevent duplicate toasts
       progressBar: true, // Show progress bar
       // Other configuration options...

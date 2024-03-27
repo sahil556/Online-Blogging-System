@@ -9,14 +9,15 @@ import { PostService } from 'src/app/services/post.service';
   styleUrls: ['./single-post.component.css']
 })
 export class SinglePostComponent {
-
-    constructor(private route: ActivatedRoute, private postservice: PostService, private loader: LoaderService){}
+  constructor(private route: ActivatedRoute, private postservice: PostService, private loader: LoaderService){}
     singlePost : any;
     postId : string = "";
+    currentUserId: string | null = ""; 
     similarPostArray: Array<{id:string, data:any}>=[];
     commentArray: Array<{id:string, data:any}>=[];
     ngOnInit()
     {
+      this.currentUserId = JSON.parse(localStorage.getItem('user') || '{}').email
       this.loader.showLoader();
       this.route.params.subscribe(val =>{
 

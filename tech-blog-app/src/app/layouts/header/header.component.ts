@@ -10,14 +10,27 @@ import { Observable } from 'rxjs';
 export class HeaderComponent {
   user: any = '';
   isLoggedin$!: Observable<boolean>;
-
-  constructor(private authservice: AuthService){}
+  shouldDisplayLogin:boolean = true;
+  constructor(private authservice: AuthService){
+  }
   ngOnInit()
   {
-    this.user = JSON.parse(localStorage.getItem('user') || '{}').email;
     this.isLoggedin$ = this.authservice.isLoggedin();
   }
 
+  shoulddisplay()
+  {
+    if(window.location.href.endsWith('login') || window.location.href.endsWith('signup'))
+    {
+      return false;
+    }
+    return true;
+  }
+
+  getuser()
+  {
+    return JSON.parse(localStorage.getItem('user') || '{}').email; 
+  }
   onLogout(){
     this.authservice.logout();
   }

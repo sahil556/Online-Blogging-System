@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { ActiveCommnetInterface } from '../../types/activeComment';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-comments',
@@ -14,14 +15,13 @@ export class CommentsComponent {
   commentArray : Array<{id:string, data: any}> = [];
   repliesArray: Array<{id:string, data: any}> = [];
   activeComment : ActiveCommnetInterface | null = null;
-  constructor(private postservice: PostService,){}
+  constructor(private postservice: PostService, private toastservice : ToastrService){}
   
   ngOnInit(): void
     {
-      this.postservice.loadCommentsOfUser(this.currentUserId).subscribe(val =>{
+      console.log(this.currentUserId)
+      this.postservice.loadComments(this.postId).subscribe(val =>{
         this.commentArray = val;
-        console.log(this.commentArray);
-        console.log("loading comments")
       })
     }
 
@@ -30,20 +30,33 @@ export class CommentsComponent {
     }
 
     addComment({text, parentId}:{text: string, parentId: string| null}):void{
-        // console.log(text, parentId, this.postId);
+        if(localStorage.getItem('user') == null || JSON.parse(localStorage.getItem('user') || '{}').email == undefined || localStorage.length == 0)
+        {
+          this.toastservice.info("You must login to comment", "please login into your account");
+          this.postservice.navigateToLogin();
+          return;
+        }
         this.postservice.createComment(text, parentId,this.postId, this.currentUserId);
         this.activeComment = null;
     }
     updateComment({text, commentId}:{text: string, commentId: string}):void{
+      if(localStorage.getItem('user') == 'null')
+      {
+        this.toastservice.info("You must login to comment", "please login into your account");
+        this.postservice.navigateToLogin();
+        return;
+      }
         this.postservice.updateComment(text, commentId);
         this.activeComment = null;
     }   
 
     getReplies(commentId: string){
-        this.postservice.getRepliesOfComment(commentId).subscribe(val => {
-            this.repliesArray = val;
-        })
-        return this.repliesArray;
+      return this.commentArray
+      .filter((comment) => comment.data.parentId === commentId)
+      .sort(
+        (a, b) =>
+          new Date(a.data.createdAt).getTime() - new Date(b.data.createdAt).getTime()
+      );
     }
 
     setActiveComment(activeComment: ActiveCommnetInterface | null){

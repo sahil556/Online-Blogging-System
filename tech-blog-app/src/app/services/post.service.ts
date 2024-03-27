@@ -281,4 +281,9 @@ export class PostService {
       this.toast.warning("Comment Deleted Successfully !");
     })
   }
+
+  navigateToLogin()
+  {
+    this.router.navigate(['/login']);
+  }
 }

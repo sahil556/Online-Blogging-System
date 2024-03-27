@@ -12,7 +12,7 @@
                     <p [innerHTML]="singlePost.content"></p>
                 </div>
             </div>
-            <app-comments currentUserId="sahil1@gmail.com" [postId]="postId"></app-comments>
+            <app-comments currentUserId="{{currentUserId}}" [postId]="postId"></app-comments>
             <!-- <app-comment-form [postId]="postId"></app-comment-form>
             <app-comment-list [commentData]="commentArray"></app-comment-list> -->
         </div>

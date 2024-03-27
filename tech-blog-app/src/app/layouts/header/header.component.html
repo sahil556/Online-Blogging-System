@@ -17,8 +17,8 @@
                 <a class="nav-link" href="contact">Contact Us</a>
               </li>
             </ul>
-            <a href="#"  *ngIf="isLoggedin$ | async;" class="mr-3 nav-link"><b>Hello {{user}} !</b></a>&nbsp;
-            <div [ngSwitch]="(isLoggedin$ | async)">
+            <a href="#"  *ngIf="isLoggedin$ | async;" class="mr-3 nav-link"><b>Hello {{getuser()}} !</b></a>&nbsp;
+            <div *ngIf="shoulddisplay()" [ngSwitch]="(isLoggedin$ | async)">
             <button class="btn btn-sm btn-info bg-theme-secondary text-theme-primary" *ngSwitchCase="false" routerLink="/login">Login</button>
             <button class="btn btn-sm btn-info bg-theme-secondary text-theme-success" *ngSwitchCase="true" (click)="onLogout()">Logout</button>
             </div>
