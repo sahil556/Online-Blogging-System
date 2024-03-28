@@ -77,7 +77,10 @@ export class AuthService {
   {
     console.log(JSON.parse(localStorage.getItem('user') || '{}').email)
     if(JSON.parse(localStorage.getItem('user') || '{}').email != undefined)
+    {
       this.loggedIn.next(true);
+      this.isLoggedinguard = true;
+    }
     return this.loggedIn.asObservable();
   }
 

@@ -14,6 +14,7 @@ import { authGuard } from './guards/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AllPostComponent } from './posts/all-post/all-post.component';
 import { NewPostComponent } from './posts/new-post/new-post.component';
+import { CommentsComponent } from './comments/comments/comments.component';
 
 const routes: Routes = [
   {path:'', component: MainComponentComponent, 
@@ -23,7 +24,7 @@ const routes: Routes = [
       {path:'post/:id', component:SinglePostComponent},
     ]
   },
-  {path: 'dashboard', component:DashboardComponent},
+  {path: 'dashboard', component:DashboardComponent, canActivate: [authGuard]},
   {path:'categories/:category/:id', component: SingleCategoryComponent},
   {path:'post/:id', component:SinglePostComponent},
   {path:'about', component:AboutUsComponent},
@@ -32,8 +33,9 @@ const routes: Routes = [
   {path: 'code', component:SingleCodeComponent},
   {path:'login', component:LoginComponent},
   {path:'signup', component:SignupComponent},
-  {path:'myposts', component:AllPostComponent},
-  {path:'myposts/create-post', component:NewPostComponent}
+  {path:'myposts', component:AllPostComponent, canActivate: [authGuard]},
+  {path:'myposts/create-post', component:NewPostComponent, canActivate: [authGuard]},
+  {path:'mycomments', component: CommentsComponent, canActivate:[authGuard]}
 
 ];
 

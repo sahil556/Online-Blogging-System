@@ -13,8 +13,6 @@ import { SinglePostComponent } from './pages/single-post/single-post.component';
 import { TermsAndConditionComponent } from './pages/terms-and-condition/terms-and-condition.component';
 import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 import { SubscriptionFormComponent } from './subscription-form/subscription-form.component';
-import { CommentFormComponent } from './comments/comment-form/comment-form.component';
-import { CommentListComponent } from './comments/comment-list/comment-list.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { PostCardComponent } from './layouts/post-card/post-card.component';
 import { AngularFireModule} from '@angular/fire/compat';
@@ -33,6 +31,7 @@ import { NewPostComponent } from './posts/new-post/new-post.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { CommentModule } from './post-comments/comment/comment.module';
+import { CommentsComponent } from './comments/comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -46,8 +45,6 @@ import { CommentModule } from './post-comments/comment/comment.module';
     TermsAndConditionComponent,
     ContactUsComponent,
     SubscriptionFormComponent,
-    CommentFormComponent,
-    CommentListComponent,
     AboutUsComponent,
     PostCardComponent,
     SingleCodeComponent,
@@ -57,7 +54,8 @@ import { CommentModule } from './post-comments/comment/comment.module';
     LoginComponent,
     DashboardComponent,
     AllPostComponent,
-    NewPostComponent
+    NewPostComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,

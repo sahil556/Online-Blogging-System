@@ -11,7 +11,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     return true;
   else
   {
-    toastr.warning("You don't have permission to access this page.")
+    toastr.warning("Requires verification to access requested page.", "Please Login First")
     router.navigate(['/login']); 
     return false;
   }

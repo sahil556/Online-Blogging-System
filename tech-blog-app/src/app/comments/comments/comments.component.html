@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow-effect bg-theme-secondary">
+                <div class="card-body text-center">
+                    <h3 class="text-theme-center">All Comments</h3>
+                    <p>Here You can view all your Comments</p>
+                    <button class="btn btn-warning" routerLink="/dashboard">Back to Dashboard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row"><div class="col-md-12">
+        <div class="card shadow-effect">
+            <div class="card-body">
+                <table class="table row-border hover">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            
+                            <th>Comment</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let comment of commentArray; let i = index">
+                            <td width="10">{{i+1}}</td>
+                            <td width="300">{{comment.data.comment}}</td>
+                            <td>{{comment.data.createdAt | date}}</td>
+                            <td>
+                                &nbsp;<button class="btn btn-sm btn-info"> <a target="_blank" href="{{comment.data.postId}}">View Post</a></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div></div>
+</div>
