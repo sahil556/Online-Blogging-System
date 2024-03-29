@@ -6,13 +6,16 @@ import { map } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Post } from '../models/post';
+import { SubscriptionService } from './subscription.service';
+import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
 
-  constructor(private angularfirestore: AngularFirestore,private angularfirestorage: AngularFireStorage,  private toast : ToastrService, private router: Router) { }
+  constructor(private angularfirestore: AngularFirestore,private angularfirestorage: AngularFireStorage,  private toast : ToastrService, private router: Router, private subscriberService : SubscriptionService) { }
+  subscribersArray: Array<{id:string, data:any}> = [];
 
   // uploading image to firestore and storing image url to post object
   uploadImage(selectedImage: any, postData: Post, formStatus: string, id:string) {
@@ -45,22 +48,22 @@ export class PostService {
       this.toast.success('Data Inserted Successfully !')
       
       // get all subscribers here
-      // this.subscriberService.loadData().subscribe(values =>{
-      //   this.subscribersArray = values;
-      // })      
-      // this.subscribersArray.forEach(element => {
-      //   emailjs.init("NvHqVqPwqGANopNMd");
-      //   emailjs.send("service_je7kaff","template_j128vme",{
-      //     Title_Post: postData.title,
-      //     Post_Link: "https://tech-blog-application.web.app/post/" + docRef.id ,
-      //     To_Email: element.data.email,
-      //     }).then(() =>{
-      //       console.log("subscribers are notified")
-      //     }, (error) =>{
-      //       console.log("notification failed")
-      //     })
+      this.subscriberService.loadData().subscribe(values =>{
+        this.subscribersArray = values;
+      })      
+      this.subscribersArray.forEach(element => {
+        emailjs.init("NvHqVqPwqGANopNMd");
+        emailjs.send("service_je7kaff","template_j128vme",{
+          Title_Post: postData.title,
+          Post_Link: "https://tech-blog-application.web.app/post/" + docRef.id ,
+          To_Email: element.data.email,
+          }).then(() =>{
+            console.log("subscribers are notified")
+          }, (error) =>{
+            console.log("notification failed")
+          })
   
-      // });
+      });
       // this.toast.success('All subscribers are notified!', "Notifications of new post is sent to all subscribers")
       this.router.navigate(['/myposts']);
     })

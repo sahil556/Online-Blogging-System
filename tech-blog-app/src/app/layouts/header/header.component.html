@@ -1,8 +1,9 @@
-<header>
+<header style="margin-bottom: 20px;">
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a href="#" class="site-logo" routerLink="/">TECH-BLOG</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -16,12 +17,14 @@
               <li class="nav-item">
                 <a class="nav-link" href="about">About Us</a>
               </li>
+             
             </ul>
             <a href="#"  *ngIf="isLoggedin$ | async;" class="mr-3 nav-link"><b>Hello {{getuser()}} !</b></a>&nbsp;
             <div *ngIf="shoulddisplay()" [ngSwitch]="(isLoggedin$ | async)">
             <button class="btn btn-sm btn-info bg-theme-secondary text-theme-primary" *ngSwitchCase="false" routerLink="/login">Login</button>
             <button class="btn btn-sm btn-info bg-theme-secondary text-theme-success" *ngSwitchCase="true" (click)="onLogout()">Logout</button>
             </div>
+            <button (click)="sendMail()">send Mail</button>
           </div>
         </div>
       </nav>
