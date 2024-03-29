@@ -1,0 +1,12 @@
+header {
+    height: 100px;
+}
+
+.site-logo{
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+.nav-link{
+    font-weight: 500;
+}
