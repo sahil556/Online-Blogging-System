@@ -16,9 +16,6 @@
               <li class="nav-item">
                 <a class="nav-link" href="about">About Us</a>
               </li>
-              <li class="nav-item" >
-                <a class="nav-link" href="contact">Contact Us</a>
-              </li>
             </ul>
             <a href="#"  *ngIf="isLoggedin$ | async;" class="mr-3 nav-link"><b>Hello {{getuser()}} !</b></a>&nbsp;
             <div *ngIf="shoulddisplay()" [ngSwitch]="(isLoggedin$ | async)">
