@@ -15,6 +15,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AllPostComponent } from './posts/all-post/all-post.component';
 import { NewPostComponent } from './posts/new-post/new-post.component';
 import { CommentsComponent } from './comments/comments/comments.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 
 const routes: Routes = [
   {path:'', component: MainComponentComponent, 
@@ -35,7 +36,8 @@ const routes: Routes = [
   {path:'signup', component:SignupComponent},
   {path:'myposts', component:AllPostComponent, canActivate: [authGuard]},
   {path:'myposts/create-post', component:NewPostComponent, canActivate: [authGuard]},
-  {path:'mycomments', component: CommentsComponent, canActivate:[authGuard]}
+  {path:'mycomments', component: CommentsComponent, canActivate:[authGuard]},
+  {path:'reset-password', component:ResetPasswordComponent}
 
 ];
 

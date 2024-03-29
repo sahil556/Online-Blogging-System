@@ -32,6 +32,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { CommentModule } from './post-comments/comment/comment.module';
 import { CommentsComponent } from './comments/comments/comments.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { CommentsComponent } from './comments/comments/comments.component';
     DashboardComponent,
     AllPostComponent,
     NewPostComponent,
-    CommentsComponent
+    CommentsComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
