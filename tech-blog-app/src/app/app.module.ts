@@ -33,6 +33,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { CommentModule } from './post-comments/comment/comment.module';
 import { CommentsComponent } from './comments/comments/comments.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { LoaderComponent } from './layouts/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { ResetPasswordComponent } from './auth/reset-password/reset-password.com
     AllPostComponent,
     NewPostComponent,
     CommentsComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

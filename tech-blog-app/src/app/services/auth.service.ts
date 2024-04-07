@@ -14,8 +14,8 @@ export class AuthService {
   constructor(private afauth: AngularFireAuth, private toastr : ToastrService,  private router : Router) { }
   login(email: string, password: string)
   {
-    this.afauth.signInWithEmailAndPassword(email, password).then((logRef)=>{
-      this.toastr.success("Logged in Successfully");
+    let responce = this.afauth.signInWithEmailAndPassword(email, password);
+    responce.then((logRef)=>{
       this.loadUser()
       this.loggedIn.next(true);
       this.isLoggedinguard = true;
@@ -24,23 +24,14 @@ export class AuthService {
     .catch(err =>{
       console.log(err)
       this.toastr.warning(err,"Invalid Credentials");
-
     })
+    return responce;
   }
 
   signup(email:string, password:string, cpassword:string)
   {
-    if(email == "" || password == "")
-    {
-      this.toastr.warning("All Fields Are Required");
-      return;
-    }
-    else if(password != cpassword)
-    {
-      this.toastr.warning("Password and Confirm Password must be the same")
-      return;
-    }
-    this.afauth.createUserWithEmailAndPassword(email, password).then((signupref) => {
+    let responce = this.afauth.createUserWithEmailAndPassword(email, password);
+    responce.then((signupref) => {
       this.toastr.success("SignUp Successfull !");
       this.loadUser()
       this.loggedIn.next(true);
@@ -51,6 +42,7 @@ export class AuthService {
       console.log(err);
       this.toastr.warning(err, "user creation failed");
     })
+    return responce;
 
   }
 
